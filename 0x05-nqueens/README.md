@@ -7,7 +7,7 @@ The program is run using the following command.
 
 Replace `N` with the desired size of the chessboard. The program will then print each solution on a separate line, adhering to the specified format.
 
-## Eoor Handling
+## Error Handling
 The program includes error handling for different scenarios:
 
 1. If the user provides the wrong number of arguments:
