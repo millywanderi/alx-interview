@@ -16,7 +16,7 @@ function Names (i, url, chars, len) {
   }
   request.get(url, function (err, response, body) {
     if (!err) {
-	  console.log(JSON.parse(body).name);
+      console.log(JSON.parse(body).name);
       i++;
       Names(i, chars[i], chars, len);
     }
