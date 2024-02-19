@@ -22,9 +22,6 @@ This will output:
 The `rotate_2d_matrix` function takes a single argument:
 * `matrix`: A non-empty n x n 2D list representing the matrix to be rotated.
 * The function does not return anything. Instead, it directly modifies the input matrix in-place. 
-* The rotation is performed in two steps:
-1. Transpose the matrix by swapping elements across the diagonal.
-2. Reverse each row of the transposed matrix.
 
 ## Requirements
-* Pytho 3.x
+* Python 3.x
