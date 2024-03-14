@@ -4,29 +4,35 @@
 
 def isWinner(x, nums):
     """Prime Game"""
-    if not nums or x < 1:
-        return none
-
-    maria_wins = 0
-    ben_wins = 0
-
-    n = max(nums)
-    sieve = [True for h in range(1, n + 1, 1)]
-    sieve[0] = False
-    for k, is_sieve in enumerate(sieve, 1):
-        if k == 1 or not is_sieve:
-            continue
-        for s in range(k + k, n + 1, k):
-            sieve[s - 1] = False
-
-    for p, n in zip(range(x), nums):
-        sieve_count = len(list(filter(lambda x: x, sieve[0: n])))
-        ben_wins += sieve_count % 2 == 0
-        maria_wins += sieve_count % 2 == 1
-
-    if maria_wins == ben_wins:
+    if x <= 1 or nums is None:
         return None
-    elif maria_wins > ben_wins:
-        return 'Maria'
-    elif maria_wins < ben_wins:
+    if x != len(nums):
+        return None
+    ben = 0
+    maria = 0
+
+    a = [1 for x in range(sorted(nums)[-1] + 1)]
+    a[0], a[1] = 0, 0
+    for i in range(2, len(a)):
+        rm_multiples(a, i)
+
+    for i in nums:
+        if sum(a[0:i + 1]) % 2 == 0:
+            ben += 1
+        else:
+            maria += 1
+
+    if ben > maria:
         return "Ben"
+    if maria > ben:
+        return "Maria"
+    return None
+
+
+def rm_multiples(ls, x):
+    """Removes multiples of prime numbers in an array"""
+    for i in range(2, len(ls)):
+        try:
+            ls[i * x] = 0
+        except (ValueError, IndexError):
+            break
