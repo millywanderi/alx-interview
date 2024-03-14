@@ -6,24 +6,27 @@ def isWinner(x, nums):
     """Prime Game"""
     if not nums or x < 1:
         return none
+
+    maria_wins = 0
+    ben_wins = 0
+
     n = max(nums)
-    sieve = [True] * (n + 1)
+    sieve = [True for h in range(1, n + 1, 1)]
     sieve[0] = False
-    sieve[1] = False
-    for i in range(2, int(n ** 0.5) + 1):
-        if sieve[i]:
-            for j in range(i * i, n + 1, i):
-                sieve[j] = False
-    c = 0
-    for i in range(len(sieve)):
-        if sieve[i]:
-            c += 1
-        sieve[i] = c
-    p1 = 0
-    for n in nums:
-        p1 += sieve[n] % 2 == 1
-    if p1 * 2 == len(nums):
+    for k, is_sieve in enumerate(sieve, 1):
+        if k == 1 or not is_sieve:
+            continue
+        for s in range(k + k, n + 1, k):
+            sieve[s - 1] = False
+
+    for p, n in zip(range(x), nums):
+        sieve_count = len(list(filter(lambda x: x, sieve[0: n])))
+        ben_wins += sieve_count % 2 == 0
+        maria_wins += sieve_count % 2 == 1
+
+    if maria_wins == ben_wins:
         return None
-    if p1 * 2 > len(nums):
-        return "Maria"
-    return "Ben"
+    elif maria_wins > ben_wins:
+        return 'Maria'
+    elif maria_wins < ben_wins:
+        return "Ben"
