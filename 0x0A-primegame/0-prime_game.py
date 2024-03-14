@@ -4,7 +4,7 @@
 
 def isWinner(x, nums):
     """Prime Game"""
-    if x <= 1 or nums is None:
+    if x <= 0 or nums is None:
         return None
     if x != len(nums):
         return None
